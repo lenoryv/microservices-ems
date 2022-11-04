@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User } from './interfaces/user.interface';
@@ -34,12 +34,12 @@ export class UserService {
     return newUser.save();
   }
 
-  // Delete User
+  // Delete user
   async deleteUser(userID: string): Promise<User> {
     try {
-      const deletedUser = await this.userModel.findOneAndDelete({
-        _id: { $oid: userID },
-      });
+      const deletedUser = await this.userModel.findByIdAndDelete(
+        new mongoose.Types.ObjectId(userID),
+      );
       return deletedUser;
     } catch (error) {
       return null;

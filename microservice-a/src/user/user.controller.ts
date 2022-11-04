@@ -22,11 +22,25 @@ export class UserController {
   // Add user: /user/create
   @Post('/create')
   async createUser(@Res() res, @Body() createUserDTO: CreateUserDTO) {
-    const user = await this.userService.createUser(createUserDTO);
-    return res.status(HttpStatus.OK).json({
-      message: 'user Successfully Created',
-      user,
-    });
+    const { name, rol, username, password, age } = createUserDTO;
+    const newUser: CreateUserDTO = {
+      name: name,
+      rol: rol,
+      username: username,
+      password: password,
+      age: age,
+    };
+    try {
+      const user = await this.userService.createUser(newUser);
+      return res.status(HttpStatus.OK).json({
+        message: 'user Successfully Created',
+        user,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: error,
+      });
+    }
   }
 
   // GET single user

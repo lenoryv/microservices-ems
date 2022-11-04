@@ -2,11 +2,20 @@ import { Schema } from 'mongoose';
 
 export const UserSchema = new Schema(
   {
-    name: String,
-    rol: String,
+    name: {
+      type: String,
+      required: true,
+    },
+    rol: {
+      type: String,
+      required: true,
+    },
     username: String,
     password: String,
-    age: Number,
+    age: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false },
 );
