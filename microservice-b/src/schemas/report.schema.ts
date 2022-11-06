@@ -8,11 +8,9 @@ export const ReportSchema = new Schema(
     },
     entryTime: {
       type: Date,
-      required: true,
     },
     exitTime: {
       type: Date,
-      required: true,
     },
   },
   { versionKey: false },

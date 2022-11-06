@@ -93,8 +93,9 @@ export class AppController {
     });
   }
   //RabbitMQ
-  @MessagePattern({ cmd: 'greeting' })
-  getGreetingMessage(name: string): string {
-    return `Hello Leor ${name}`;
+  @MessagePattern({ cmd: 'validate' })
+  async getGreetingMessageAysnc(employeeID: string): Promise<boolean> {
+    const validated = await this.appService.validateEmployee(employeeID);
+    return validated;
   }
 }
