@@ -11,7 +11,7 @@ import { ClientProxy } from '@nestjs/microservices';
 export class AppService {
   constructor(
     @InjectModel('Report') private readonly reportModel: Model<Report>,
-    @Inject('MATH_SERVICE') private readonly client: ClientProxy,
+    @Inject('REPORT_SERVICE') private readonly client: ClientProxy,
   ) {}
   //Get all reports
   async getReports(): Promise<Report[]> {
