@@ -64,4 +64,15 @@ export class AppService {
     );
     return updatedEmployee;
   }
+  //Validate Employee model
+  async validateEmployee(employeeID: string): Promise<boolean> {
+    try {
+      const validatedEmployee = await this.employeeModel.findById(
+        new mongoose.Types.ObjectId(employeeID),
+      );
+      return !!validatedEmployee;
+    } catch (error) {
+      return false;
+    }
+  }
 }
