@@ -1,12 +1,16 @@
 import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
-import { Body, Post } from '@nestjs/common/decorators';
+import { Body, Inject, Post } from '@nestjs/common/decorators';
+import { ClientProxy } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 import { CreateReportDTO } from './dto/report.dto';
 
 @Controller('report')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    @Inject('MATH_SERVICE') private readonly client: ClientProxy,
+  ) {}
 
   //Get reports
   @Get('/')
@@ -35,5 +39,10 @@ export class AppController {
         message: error,
       });
     }
+  }
+  //RabbitMQ message
+  @Get('/message')
+  async getHello() {
+    return this.client.send({ cmd: 'greeting' }, 'Progressive Coder');
   }
 }
