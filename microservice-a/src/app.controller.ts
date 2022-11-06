@@ -13,9 +13,9 @@ import {
 import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
-import { CreateUserDTO } from './dto/user.dto';
+import { CreateEmployeeDTO } from './dto/employee.dto';
 
-@Controller('user')
+@Controller('employee')
 export class AppController {
   constructor(private appService: AppService) {}
 
@@ -26,34 +26,34 @@ export class AppController {
     const user = await this.appService.loginUser(username, password);
     if (!user) throw new NotFoundException('Incorrect username or password');
     return res.status(HttpStatus.OK).json({
-      message: 'user Successfully logged in',
+      message: 'User Logged In Successfully',
       user,
     });
   }
 
-  // Get users
+  // Get employees
   @Get('/')
-  async getUsers(@Res() res) {
-    const users = await this.appService.getUsers();
+  async getEmployees(@Res() res) {
+    const users = await this.appService.getEmployees();
     return res.status(HttpStatus.OK).json(users);
   }
 
-  // Add user: /user/create
+  // Add employee: /employee/create
   @Post('/create')
-  async createUser(@Res() res, @Body() createUserDTO: CreateUserDTO) {
-    const { name, rol, username, password, age } = createUserDTO;
-    const newUser: CreateUserDTO = {
+  async createEmployee(
+    @Res() res,
+    @Body() createEmployeeDTO: CreateEmployeeDTO,
+  ) {
+    const { name, age } = createEmployeeDTO;
+    const newEmployee: CreateEmployeeDTO = {
       name: name,
-      rol: rol,
-      username: username,
-      password: password,
       age: age,
     };
     try {
-      const user = await this.appService.createUser(newUser);
+      const employee = await this.appService.createEmployee(newEmployee);
       return res.status(HttpStatus.OK).json({
-        message: 'User Successfully Created',
-        user,
+        message: 'Employee Created Successfully',
+        employee,
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({
@@ -62,29 +62,34 @@ export class AppController {
     }
   }
 
-  // Update user: /update?userID=5c9d45e705ea4843c8d0e8f7
+  // Update employee: /update?employeeID=5c9d45e705ea4843c8d0e8f7
   @Put('/update')
-  async updateUser(
+  async updateEmployee(
     @Res() res,
-    @Body() createUserDTO: CreateUserDTO,
-    @Query('userID') userID,
+    @Body() createEmployeeDTO: CreateEmployeeDTO,
+    @Query('employeeID') employeeID,
   ) {
-    const updatedUser = await this.appService.updateUser(userID, createUserDTO);
-    if (!updatedUser) throw new NotFoundException('User does not exist!');
+    const updatedEmployee = await this.appService.updateEmployee(
+      employeeID,
+      createEmployeeDTO,
+    );
+    if (!updatedEmployee)
+      throw new NotFoundException('Employee does not exist!');
     return res.status(HttpStatus.OK).json({
-      message: 'User Updated Successfully',
-      updatedUser,
+      message: 'Employee Updated Successfully',
+      updatedEmployee,
     });
   }
 
-  //Delete user: /delete?userID=5c9d45e705ea4843c8d0e8f7
+  //Delete employee: /delete?employeeID=5c9d45e705ea4843c8d0e8f7
   @Delete('/delete')
-  async deleteUser(@Res() res, @Query('userID') userID) {
-    const userDeleted = await this.appService.deleteUser(userID);
-    if (!userDeleted) throw new NotFoundException('User does not exist!');
+  async deleteEmployee(@Res() res, @Query('employeeID') employeeID) {
+    const deletedEmployee = await this.appService.deleteEmployee(employeeID);
+    if (!deletedEmployee)
+      throw new NotFoundException('Employee does not exist!');
     return res.status(HttpStatus.OK).json({
-      message: 'User Deleted Successfully',
-      userDeleted,
+      message: 'Employee Deleted Successfully',
+      deletedEmployee,
     });
   }
   //RabbitMQ

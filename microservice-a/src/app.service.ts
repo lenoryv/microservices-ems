@@ -4,11 +4,15 @@ import mongoose, { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User } from './interfaces/user.interface';
-import { CreateUserDTO } from './dto/user.dto';
+import { Employee } from './interfaces/employee.interface';
+import { CreateEmployeeDTO } from './dto/employee.dto';
 
 @Injectable()
 export class AppService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+  constructor(
+    @InjectModel('User') private readonly userModel: Model<User>,
+    @InjectModel('Employee') private readonly employeeModel: Model<Employee>,
+  ) {}
 
   //Login admin
   async loginUser(username: string, password: string): Promise<User> {
@@ -22,40 +26,42 @@ export class AppService {
     } catch (error) {}
   }
 
-  // Get all users
-  async getUsers(): Promise<User[]> {
-    const users = await this.userModel.find();
-    return users;
+  // Get all employees
+  async getEmployees(): Promise<Employee[]> {
+    const employees = await this.employeeModel.find();
+    return employees;
   }
 
-  // Post a single user
-  async createUser(createUserDTO: CreateUserDTO): Promise<User> {
-    const newUser = new this.userModel(createUserDTO);
-    return newUser.save();
+  // Post a single employee
+  async createEmployee(
+    createEmployeeDTO: CreateEmployeeDTO,
+  ): Promise<Employee> {
+    const newEmployee = new this.employeeModel(createEmployeeDTO);
+    return newEmployee.save();
   }
 
-  // Delete user
-  async deleteUser(userID: string): Promise<User> {
+  // Delete employee
+  async deleteEmployee(employeeID: string): Promise<Employee> {
     try {
-      const deletedUser = await this.userModel.findByIdAndDelete(
-        new mongoose.Types.ObjectId(userID),
+      const deletedEmployee = await this.employeeModel.findByIdAndDelete(
+        new mongoose.Types.ObjectId(employeeID),
       );
-      return deletedUser;
+      return deletedEmployee;
     } catch (error) {
       return null;
     }
   }
 
-  // Put a single User
-  async updateUser(
-    userID: string,
-    createUserDTO: CreateUserDTO,
-  ): Promise<User> {
-    const updatedUser = await this.userModel.findByIdAndUpdate(
-      userID,
-      createUserDTO,
+  // Put a single employee
+  async updateEmployee(
+    employeeID: string,
+    createEmployeeDTO: CreateEmployeeDTO,
+  ): Promise<Employee> {
+    const updatedEmployee = await this.employeeModel.findByIdAndUpdate(
+      employeeID,
+      createEmployeeDTO,
       { new: true },
     );
-    return updatedUser;
+    return updatedEmployee;
   }
 }

@@ -1,18 +1,20 @@
 import { Schema } from 'mongoose';
 
-export const UserSchema = new Schema(
+export const EmployeeSchema = new Schema(
   {
-    rol: {
+    name: {
       type: String,
       required: true,
     },
-    username: String,
-    password: String,
+    age: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false },
 );
 
-UserSchema.set('toJSON', {
+EmployeeSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
     returnedObject.id = returnedObject._id;
     delete returnedObject._id;
