@@ -10,6 +10,7 @@ import {
   Query,
   NotFoundException,
 } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
 import { CreateUserDTO } from './dto/user.dto';
@@ -85,5 +86,10 @@ export class AppController {
       message: 'User Deleted Successfully',
       userDeleted,
     });
+  }
+  //RabbitMQ
+  @MessagePattern({ cmd: 'greeting' })
+  getGreetingMessage(name: string): string {
+    return `Hello Leor ${name}`;
   }
 }
