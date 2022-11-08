@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  microservice-a:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: nest-rabbitmq
+    hostname: nest-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment: 
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: guest
