@@ -15,7 +15,7 @@ import { Transport, ClientsModule } from '@nestjs/microservices';
         name: 'REPORT_SERVICE',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://localhost:5672'],
+          urls: ['amqp://rabbitmq:5672'],
           queue: 'reports_queue',
           queueOptions: {
             durable: false,
