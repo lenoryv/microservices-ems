@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 //Mongoose
 import mongoose, { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-
+//Interfaces
 import { User } from './interfaces/user.interface';
 import { Employee } from './interfaces/employee.interface';
+//Data Transfer Object
 import { CreateEmployeeDTO } from './dto/employee.dto';
 
 @Injectable()
@@ -30,6 +31,11 @@ export class AppService {
   async getEmployees(): Promise<Employee[]> {
     const employees = await this.employeeModel.find();
     return employees;
+  }
+  // Get a single employee
+  async getEmployee(employeeID: string): Promise<Employee> {
+    const employee = await this.employeeModel.findById(employeeID);
+    return employee;
   }
 
   // Post a single employee
@@ -64,7 +70,7 @@ export class AppService {
     );
     return updatedEmployee;
   }
-  //Validate Employee model
+  //Validate Employee in Database
   async validateEmployee(employeeID: string): Promise<boolean> {
     try {
       const validatedEmployee = await this.employeeModel.findById(

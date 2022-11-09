@@ -8,6 +8,7 @@ async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
+  //Transportador RabbitMQ
   app.connectMicroservice({
     transport: Transport.RMQ,
     options: {

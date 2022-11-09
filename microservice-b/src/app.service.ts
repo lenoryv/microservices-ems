@@ -2,9 +2,11 @@ import { Inject, Injectable } from '@nestjs/common';
 //Mongoose
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-
+//Interface
 import { Report } from './interfaces/report.interface';
+//Data Transfer Object
 import { CreateReportDTO } from './dto/report.dto';
+//Client RabbitMQ
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -23,19 +25,7 @@ export class AppService {
     const newReport = new this.reportModel(createReportDTO);
     return newReport.save();
   }
-  // Put a single report
-  async updateReport(
-    reportID: string,
-    createReportDTO: CreateReportDTO,
-  ): Promise<Report> {
-    const updatedReport = await this.reportModel.findByIdAndUpdate(
-      reportID,
-      createReportDTO,
-      { new: true },
-    );
-    return updatedReport;
-  }
-  //Get hours by month
+  //Get hours by range time
   async getHours(
     employeeID: string,
     startDate: string,

@@ -1,7 +1,7 @@
 import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
 import { Body, Post, Query } from '@nestjs/common/decorators';
 import { AppService } from './app.service';
-
+//Data Transfer Object
 import { CreateReportDTO } from './dto/report.dto';
 
 @Controller('report')

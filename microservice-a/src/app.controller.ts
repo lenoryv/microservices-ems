@@ -12,14 +12,14 @@ import {
 } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
-
+//Data Transfer Object
 import { CreateEmployeeDTO } from './dto/employee.dto';
 
 @Controller('employee')
 export class AppController {
   constructor(private appService: AppService) {}
 
-  // GET single user
+  // Admin Login
   @Get('/login')
   async loginUser(@Res() res, @Query() filterQuery) {
     const { username, password } = filterQuery;
@@ -34,8 +34,15 @@ export class AppController {
   // Get employees
   @Get('/')
   async getEmployees(@Res() res) {
-    const users = await this.appService.getEmployees();
-    return res.status(HttpStatus.OK).json(users);
+    const employees = await this.appService.getEmployees();
+    return res.status(HttpStatus.OK).json(employees);
+  }
+
+  // Get a single employee
+  @Get('/')
+  async getEmployee(@Res() res, @Query('employeeID') employeeID) {
+    const employee = await this.appService.getEmployee(employeeID);
+    return res.status(HttpStatus.OK).json(employee);
   }
 
   // Add employee: /employee/create
