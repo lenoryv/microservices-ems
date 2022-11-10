@@ -15,7 +15,7 @@ import { AppService } from './app.service';
 //Data Transfer Object
 import { CreateEmployeeDTO } from './dto/employee.dto';
 
-@Controller('employee')
+@Controller('user')
 export class AppController {
   constructor(private appService: AppService) {}
 
@@ -32,21 +32,25 @@ export class AppController {
   }
 
   // Get employees
-  @Get('/')
+  @Get('/employees')
   async getEmployees(@Res() res) {
     const employees = await this.appService.getEmployees();
     return res.status(HttpStatus.OK).json(employees);
   }
 
   // Get a single employee
-  @Get('/')
+  @Get('/employee')
   async getEmployee(@Res() res, @Query('employeeID') employeeID) {
     const employee = await this.appService.getEmployee(employeeID);
-    return res.status(HttpStatus.OK).json(employee);
+    if (!employee) throw new NotFoundException('Employee does not exist!');
+    return res.status(HttpStatus.OK).json({
+      message: 'Employee Info',
+      employee,
+    });
   }
 
   // Add employee: /employee/create
-  @Post('/create')
+  @Post('/employee/create')
   async createEmployee(
     @Res() res,
     @Body() createEmployeeDTO: CreateEmployeeDTO,
@@ -70,7 +74,7 @@ export class AppController {
   }
 
   // Update employee: /update?employeeID=5c9d45e705ea4843c8d0e8f7
-  @Put('/update')
+  @Put('/employee/update')
   async updateEmployee(
     @Res() res,
     @Body() createEmployeeDTO: CreateEmployeeDTO,
@@ -89,7 +93,7 @@ export class AppController {
   }
 
   //Delete employee: /delete?employeeID=5c9d45e705ea4843c8d0e8f7
-  @Delete('/delete')
+  @Delete('/employee/delete')
   async deleteEmployee(@Res() res, @Query('employeeID') employeeID) {
     const deletedEmployee = await this.appService.deleteEmployee(employeeID);
     if (!deletedEmployee)

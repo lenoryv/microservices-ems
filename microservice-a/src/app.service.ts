@@ -15,7 +15,7 @@ export class AppService {
     @InjectModel('Employee') private readonly employeeModel: Model<Employee>,
   ) {}
 
-  //Login admin
+  // Login admin
   async loginUser(username: string, password: string): Promise<User> {
     try {
       const user = await this.userModel.findOne({
@@ -70,7 +70,7 @@ export class AppService {
     );
     return updatedEmployee;
   }
-  //Validate Employee in Database
+  // Validate Employee in Database
   async validateEmployee(employeeID: string): Promise<boolean> {
     try {
       const validatedEmployee = await this.employeeModel.findById(
