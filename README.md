@@ -58,19 +58,19 @@ _Puerto 3000_
 
 Inicio de sesión Administrator:
 ~~~
-GET http://localhost:3000/employee/login?username=YOUR_USERNAME&password=YOUR_PASSWORD
+GET http://localhost:3000/user/login?username=YOUR_USERNAME&password=YOUR_PASSWORD
 ~~~
 Obtener la lista de empleados:
 ~~~
-GET http://localhost:3000/employee
+GET http://localhost:3000/user/employees
 ~~~
 Buscar informacion de un empleado por ID
 ~~~
-GET http://localhost:3000/employee/employeeID=INSERT_EMPLOYEEID
+GET http://localhost:3000/user/employee?employeeID=INSERT_EMPLOYEEID
 ~~~
 Registrar un nuevo empleado:
 ~~~
-POST http://localhost:3000/employee/create
+POST http://localhost:3000/user/employee/create
 ~~~
 Estructura del _Body_ para registrar un nuevo empleado, enviando los siguientes parámetros:
 ~~~
@@ -81,7 +81,7 @@ Estructura del _Body_ para registrar un nuevo empleado, enviando los siguientes 
 ~~~
 Actualizar información de un empleado por el ID:
 ~~~
-PUT http://localhost:3000/employee/update?employeeID=INSERT_EMPLOYEEID
+PUT http://localhost:3000/user/employee/update?employeeID=INSERT_EMPLOYEEID
 ~~~
 Estructura del _Body_ para actaulizar un empleado, enviando los parámetros que requiera actualizar:
 ~~~
@@ -92,7 +92,7 @@ Estructura del _Body_ para actaulizar un empleado, enviando los parámetros que 
 ~~~
 Eliminar un empleado por ID:
 ~~~
-DEL http://localhost:3000/employee/delete?employeeID=INSERT_EMPLOYEEID
+DEL http://localhost:3000/user/employee/delete?employeeID=INSERT_EMPLOYEEID
 ~~~
 ## Microservicio B
 _Puerto 3002_
