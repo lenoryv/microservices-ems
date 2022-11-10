@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   microservice-b:
+    image: lenoryv/microservice-b
     build:
       context: .
       dockerfile: Dockerfile
