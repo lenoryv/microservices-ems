@@ -34,7 +34,7 @@ docker compose up
 docker compose down
 ~~~
 ### Opción 2
-Descargando únicamente el archivo .yml ubicado en la raiz del proyecto denominado _docker-compose-hub_, utilizando el comando:
+Descargando únicamente el archivo .yml ubicado en la raiz del proyecto denominado _docker-compose-hub_ y utilizando el comando:
 ~~~
 docker compose -f docker-compose-hub.yml up
 ~~~
@@ -43,12 +43,12 @@ Imágenes de los microservicios disponibles en Docker Hub:
 - [Microservicio A](https://hub.docker.com/repository/docker/lenoryv/microservice-a)
 - [Microservicio B](https://hub.docker.com/repository/docker/lenoryv/microservice-b)
 
-Otras imágenes utilizadas en el proyecto para almacenar los datos y realizar la comunicación de los microservicios respectivamente:
+Otras imágenes utilizadas en el proyecto tanto para almacenar los datos y realizar la comunicación de los microservicios respectivamente:
 - [MongoDB](https://hub.docker.com/_/mongo)
 - [RabbitMQ](https://hub.docker.com/_/rabbitmq)
 
 ## Métodos de Petición HTTP
-Para realizar las siguientes peticiones se necesita de alguna plataforma API, cómo por ejemplo:
+Para realizar las siguientes peticiones se necesita de alguna plataforma API, por ejemplo:
 - [Postman](https://www.postman.com/downloads/)
 - [Insomnia](https://insomnia.rest/download)
 - Extensión para Visual Studio code [RapidAPI](https://rapidapi.com/guides/categories/rapidapi-client-vscode)
@@ -96,7 +96,7 @@ DEL http://localhost:3000/user/employee/delete?employeeID=INSERT_EMPLOYEEID
 ~~~
 ## Microservicio B
 _Puerto 3002_
-Obtener reporte de cuantas horas ha trabajado un empleado:
+Obtener reporte de las horas que ha trabajado un empleado:
 ~~~
 GET http://localhost:3002/report/hours?employeeID=INSERT_EMPLOYEEID
 ~~~
@@ -125,9 +125,9 @@ Estructura del _Body_ para registrar un nuevo reporte, enviando los siguientes p
 }
 ~~~
 # [Nestjs](https://docs.nestjs.com)
-El proyecto esta desarrollado con Nest (NestJS) el cual es un _framework_ para crear aplicaciones del lado del servidor Node.js eficientes y escalables . Utiliza JavaScript progresivo, está construido con TypeScript y es totalmente compatible (pero aún permite a los desarrolladores codificar en JavaScript puro) y combina elementos de OOP (Programación orientada a objetos), FP (Programación funcional) y FRP (Programación reactiva funcional).
+El proyecto esta desarrollado con Nest (NestJS) el cuál es un _framework_ para crear aplicaciones del lado del servidor Node.js eficientes y escalables . Utiliza JavaScript progresivo, está construido con TypeScript y es totalmente compatible (pero aún permite a los desarrolladores codificar en JavaScript puro) y combina elementos de OOP (Programación orientada a objetos), FP (Programación funcional) y FRP (Programación reactiva funcional).
 # [RabbitMQ](https://docs.nestjs.com/microservices/rabbitmq#rabbitmq)
-Para realizar la comunicación de los microservicios se utiliza RabbitMQ el cual es un intermediario de mensajes ligero y de código abierto que admite múltiples protocolos de mensajería. Se puede implementar en configuraciones distribuidas y federadas para cumplir con los requisitos de gran escala y alta disponibilidad. Además, es el intermediario de mensajes más implementado, utilizado en todo el mundo en pequeñas empresas emergentes y grandes empresas.
+Para realizar la comunicación de los microservicios se utiliza RabbitMQ el cuál es un intermediario de mensajes ligero y de código abierto que admite múltiples protocolos de mensajería. Se puede implementar en configuraciones distribuidas y federadas para cumplir con los requisitos de gran escala y alta disponibilidad. Además, es el intermediario de mensajes más implementado, utilizado en todo el mundo en pequeñas empresas emergentes y grandes empresas.
 
 Para realizar la comunicacion entre nuestro microservicios necesitamos de un corredor RabbitMQ. La forma más rápida de hacerlo funcionar es usando Docker . Podemos generar un contenedor RabbitMQ con el siguiente comando.
 ~~~
@@ -150,7 +150,7 @@ app.connectMicroservice({
     },
   });
 ~~~
-**Importante:** Si utiliza Docker Compose para construir una imagen tanto del Microservicio como del RabbitMQ al igual que en este projecto, el nombre del hostname debe ser igual al servicio dentro del docker-compose.yml. Por ejemplo si se denomina _rabbitmq_
+**Importante:** Si utiliza Docker Compose para construir una imagen tanto del Microservicio como del RabbitMQ al igual que en este projecto, el nombre del hostname debe ser igual al servicio dentro del docker-compose.yml. Por ejemplo, en este caso se lo denomina como _rabbitmq_
 ~~~yml
 version: "3.8"
 services:
