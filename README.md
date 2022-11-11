@@ -19,8 +19,8 @@ A través de Git Bash, ejecutando el siguiente comando para clonar el repositori
 git clone https://github.com/lenoryv/microservices-puntopymes.git
 ~~~
 ### Variables de entorno
-Crear un archivo _.env_ dentro de las carpetas _microservice-a_ y _microservice-b_ y _microservice-b_ y definir las siguientes variables de entorno:
-- URL_MONOGODB = "mongodb://admin:admin@mongodb:27017/microserviceB?authSource=admin"
+Crear un archivo _.env_ dentro de las carpetas _microservice-a_ y _microservice-b_. Definir las siguientes variables de entorno:
+- URL_MONOGODB = "mongodb://admin:admin@mongodb:27017/<INSERT_NAME>?authSource=admin"
 - PORT = <número de puerto>
 
 **Nota:** Los puertos deben ser diferentes para cada microservicio.
