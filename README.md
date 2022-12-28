@@ -1,7 +1,7 @@
-# Microservices PuntoPymes
-Microservicios para la empresa Puntopymes CIA
+# Microservices for Employee Management (EM)
+Microservicios para la empresa Indev
 
-**Resumen:** La empresa Puntopymes CIA, necesita llevar el control de sus empleados, es decir, la hora
+**Resumen:** La empresa Indev, necesita llevar el control de sus empleados, es decir, la hora
 de entrada y de salida:
 
 ## Requisitos
